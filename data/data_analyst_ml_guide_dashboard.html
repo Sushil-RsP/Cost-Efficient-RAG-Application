@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-900 text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analyst's ML Study Guide & Interactive Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="h-full flex overflow-hidden bg-slate-950 text-slate-200">
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="sidebarBackdrop" onclick="toggleMobileSidebar()" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 w-72 bg-slate-900 border-r border-slate-800 z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col justify-between">
+        <div class="p-6">
+            <div class="flex items-center space-x-3 mb-8">
+                <div class="p-2 bg-indigo-600 rounded-xl shadow-lg shadow-indigo-500/30 text-white">
+                    <i class="fa-solid fa-chart-line text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-slate-100 text-lg leading-tight">DA $\rightarrow$ ML</h1>
+                    <p class="text-xs text-indigo-400 font-medium">Analytics & ML Guide</p>
+                </div>
+            </div>
+
+            <nav class="space-y-1 text-sm font-medium custom-scrollbar overflow-y-auto max-h-[calc(100vh-180px)] pr-1">
+                <a href="#overview" onclick="setActiveNav(this)" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-indigo-600/20 text-indigo-300 border border-indigo-500/30">
+                    <i class="fa-solid fa-compass w-5 text-indigo-400"></i>
+                    <span>1. Role & Alignment</span>
+                </a>
+                <a href="#eda-pipeline" onclick="setActiveNav(this)" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-filter w-5 text-sky-400"></i>
+                    <span>2. EDA & Data Cleaning</span>
+                </a>
+                <a href="#analytics-models" onclick="setActiveNav(this)" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-diagram-project w-5 text-emerald-400"></i>
+                    <span>3. Analytics ML Models</span>
+                </a>
+                <a href="#business-metrics" onclick="setActiveNav(this)" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-calculator w-5 text-amber-400"></i>
+                    <span>4. Business Evaluation</span>
+                </a>
+                <a href="#tuning-leakage" onclick="setActiveNav(this)" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-sliders w-5 text-purple-400"></i>
+                    <span>5. Tuning & CV</span>
+                </a>
+                <a href="#roi-simulator" onclick="setActiveNav(this)" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-coins w-5 text-yellow-400"></i>
+                    <span>6. ROI Simulator</span>
+                </a>
+                <a href="#qa-accordion" onclick="setActiveNav(this)" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-circle-question w-5 text-rose-400"></i>
+                    <span>7. Interview Prep Q&A</span>
+                </a>
+                <a href="#code-snippets" onclick="setActiveNav(this)" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition">
+                    <i class="fa-solid fa-code w-5 text-cyan-400"></i>
+                    <span>8. Code & SQL Snippets</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="p-4 border-t border-slate-800 bg-slate-900/50">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Version 2.4</span>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
+                    Interactive Mode
+                </span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden">
+        
+        <!-- Top Navbar -->
+        <header class="h-16 border-b border-slate-800 bg-slate-900/80 backdrop-blur px-6 flex items-center justify-between z-30">
+            <div class="flex items-center space-x-4">
+                <button onclick="toggleMobileSidebar()" class="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+                <h2 class="text-base font-semibold text-slate-100 flex items-center gap-2">
+                    <span>Machine Learning Reference Handbook for Analysts</span>
+                </h2>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="hidden sm:inline-block text-xs font-mono bg-slate-800 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-700">
+                    Target: Business & Analytics
+                </span>
+            </div>
+        </header>
+
+        <!-- Scrollable Body -->
+        <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-12 custom-scrollbar">
+
+            <!-- 1. EXECUTIVE OVERVIEW -->
+            <section id="overview" class="scroll-mt-6 space-y-6">
+                <div class="border-b border-slate-800 pb-4">
+                    <div class="flex items-center space-x-2 text-indigo-400 text-sm font-semibold tracking-wider uppercase mb-1">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Section 01</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Executive Overview & Data Analyst's Role in ML</h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-1">Bridging pure predictive modeling with actionable business value and metric translation.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-slate-900/90 rounded-2xl p-6 border border-slate-800 shadow-xl hover:border-slate-700 transition">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center mb-4 text-lg">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-100 mb-2">1. EDA & Data Sensemaking</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Analysts identify data anomalies, structural biases, leakage risks, and domain distributions before any modeling begins.</p>
+                    </div>
+
+                    <div class="bg-slate-900/90 rounded-2xl p-6 border border-slate-800 shadow-xl hover:border-slate-700 transition">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center mb-4 text-lg">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-100 mb-2">2. Business Feature Engineering</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Transforming raw database logs into domain-specific aggregates (e.g., RFM scores, trailing 30-day ratios, interaction rates).</p>
+                    </div>
+
+                    <div class="bg-slate-900/90 rounded-2xl p-6 border border-slate-800 shadow-xl hover:border-slate-700 transition">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center mb-4 text-lg">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-100 mb-2">3. Business Metric Alignment</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Translating statistical metrics ($R^2$, Log Loss) into dollars saved, customer retention rate, or inventory cost reduction.</p>
+                    </div>
+                </div>
+
+                <!-- Callout Box -->
+                <div class="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-indigo-950/60 to-slate-900 border border-indigo-500/30 flex items-start space-x-4">
+                    <i class="fa-solid fa-lightbulb text-indigo-400 text-xl mt-1"></i>
+                    <div class="text-sm text-indigo-200">
+                        <strong class="font-semibold text-white">The Analyst Advantage:</strong> Data Analysts stand out by knowing <em>why</em> a model matters to stakeholders. While ML engineers focus on deployment pipelines, Analysts focus on decision utility, feature interpretability, and ROI alignment.
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. EDA & DATA CLEANING PIPELINE -->
+            <section id="eda-pipeline" class="scroll-mt-6 space-y-6">
+                <div class="border-b border-slate-800 pb-4">
+                    <div class="flex items-center space-x-2 text-sky-400 text-sm font-semibold tracking-wider uppercase mb-1">
+                        <i class="fa-solid fa-filter"></i>
+                        <span>Section 02</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">EDA & Data Cleaning Pipeline for ML</h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-1">Rigorous data preparation strategies to prevent garbage-in, garbage-out outcomes.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Missing Values Strategy -->
+                    <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <h3 class="text-lg font-bold text-sky-400 flex items-center gap-2">
+                            <i class="fa-solid fa-ban"></i> Handling Missing Values
+                        </h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                                <div class="font-semibold text-slate-200">Mean vs. Median vs. Mode</div>
+                                <p class="text-slate-400 text-xs mt-1">Use <strong>Median</strong> for skewed continuous data (e.g., Income), <strong>Mean</strong> for normally distributed continuous features, and <strong>Mode</strong> for categorical variables.</p>
+                            </div>
+                            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                                <div class="font-semibold text-slate-200">Indicator Columns (`is_missing`)</div>
+                                <p class="text-slate-400 text-xs mt-1">Create explicit binary flags (`is_null_age = 1`) prior to imputation. Missingness itself is often a predictive business signal.</p>
+                            </div>
+                            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                                <div class="font-semibold text-slate-200">When to Drop vs. Impute</div>
+                                <p class="text-slate-400 text-xs mt-1">Drop columns if missingness exceeds $40$-$50\%$ unless missingness is informative. Drop rows only if missingness is completely random and dataset size is ample.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Outlier Treatment -->
+                    <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <h3 class="text-lg font-bold text-sky-400 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line-down"></i> Outlier Detection & Treatment
+                        </h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                                <div class="font-semibold text-slate-200">IQR Method (Non-parametric)</div>
+                                <p class="text-slate-400 text-xs mt-1 font-mono">Bounds = [Q1 - 1.5×IQR, Q3 + 1.5×IQR]</p>
+                                <p class="text-slate-400 text-xs mt-1">Robust against extreme skewed values. Ideal for e-commerce order amounts.</p>
+                            </div>
+                            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                                <div class="font-semibold text-slate-200">Z-Score Method (Parametric)</div>
+                                <p class="text-slate-400 text-xs mt-1 font-mono">Flag if |Z| > 3 where Z = (X - μ) / σ</p>
+                                <p class="text-slate-400 text-xs mt-1">Suitable only for approximately normally distributed features.</p>
+                            </div>
+                            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                                <div class="font-semibold text-slate-200">Winsorizing / Capping</div>
+                                <p class="text-slate-400 text-xs mt-1">Cap values at 1st and 99th percentiles rather than deleting data points, retaining sample size while curbing extreme leverage.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categorical & Feature Scaling Comparison Table -->
+                <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                    <div class="p-5 border-b border-slate-800 font-bold text-slate-100 flex items-center justify-between">
+                        <span>Categorical Encoding & Feature Scaling Trade-offs</span>
+                        <span class="text-xs font-normal text-slate-400">Cheat Matrix</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-slate-300">
+                            <thead class="text-xs uppercase bg-slate-950 text-slate-400 border-b border-slate-800">
+                                <tr>
+                                    <th class="py-3 px-4">Technique</th>
+                                    <th class="py-3 px-4">Best Used For</th>
+                                    <th class="py-3 px-4">Business / Model Trade-off</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800/60">
+                                <tr class="hover:bg-slate-800/30">
+                                    <td class="py-3 px-4 font-semibold text-indigo-300">One-Hot Encoding</td>
+                                    <td class="py-3 px-4">Nominal data with low cardinality (&lt; 10 unique categories)</td>
+                                    <td class="py-3 px-4 text-xs text-slate-400">Prevents false ordinal assumptions, but inflates feature dimensionality (Curse of Dimensionality).</td>
+                                </tr>
+                                <tr class="hover:bg-slate-800/30">
+                                    <td class="py-3 px-4 font-semibold text-indigo-300">Ordinal Encoding</td>
+                                    <td class="py-3 px-4">Categorical data with explicit rank (e.g., Low, Med, High)</td>
+                                    <td class="py-3 px-4 text-xs text-slate-400">Preserves inherent order efficiently without adding columns.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-800/30">
+                                    <td class="py-3 px-4 font-semibold text-indigo-300">Target Encoding</td>
+                                    <td class="py-3 px-4">High cardinality (e.g., Zip Codes, Product IDs)</td>
+                                    <td class="py-3 px-4 text-xs text-slate-400">Compact representation; highly prone to <strong>target leakage</strong> if un-smoothed.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-800/30">
+                                    <td class="py-3 px-4 font-semibold text-sky-300">StandardScaler</td>
+                                    <td class="py-3 px-4">Distance-based models (SVM, KNN) & Linear/Logistic Regression</td>
+                                    <td class="py-3 px-4 text-xs text-slate-400">Centers data (Mean=0, Std=1). Sensitive to extreme outliers.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-800/30">
+                                    <td class="py-3 px-4 font-semibold text-sky-300">MinMaxScaler</td>
+                                    <td class="py-3 px-4">Neural Nets or algorithms requiring bounded range [0,1]</td>
+                                    <td class="py-3 px-4 text-xs text-slate-400">Preserves zero values in sparse matrices, but severely compressed by outliers.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-800/30">
+                                    <td class="py-3 px-4 font-semibold text-sky-300">Log Transformation</td>
+                                    <td class="py-3 px-4">Right-skewed monetary features (Revenue, Spend)</td>
+                                    <td class="py-3 px-4 text-xs text-slate-400">Compresses long tails, making distributions normal and improving linear model fit.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. ANALYTICS-DRIVEN ML MODELS -->
+            <section id="analytics-models" class="scroll-mt-6 space-y-6">
+                <div class="border-b border-slate-800 pb-4">
+                    <div class="flex items-center space-x-2 text-emerald-400 text-sm font-semibold tracking-wider uppercase mb-1">
+                        <i class="fa-solid fa-diagram-project"></i>
+                        <span>Section 03</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Analytics-Driven ML Models</h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-1">Interpreting core machine learning algorithms for business decision-makers.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Linear / Logistic -->
+                    <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-slate-100 text-lg">Regression Models</h3>
+                            <span class="text-xs font-mono bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-md">Interpretable</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Linear ($\hat{y} = \beta_0 + \beta_1 X$) & Logistic ($\ln(\frac{p}{1-p}) = \beta X$)</p>
+                        <ul class="text-sm space-y-2 text-slate-300">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-400 mt-1 text-xs"></i>
+                                <span><strong>Odds Ratios:</strong> In Logistic Regression, $e^{\beta_i}$ represents the multiplicative change in odds per unit change in $X_i$.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-400 mt-1 text-xs"></i>
+                                <span><strong>Stakeholder Value:</strong> Direct explanation of driver impact ("Every \$100 discount increases conversion odds by 25%").</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Tree Models -->
+                    <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-slate-100 text-lg">Trees & Forests</h3>
+                            <span class="text-xs font-mono bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-md">Non-linear</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Decision Trees, Random Forest, Gradient Boosting</p>
+                        <ul class="text-sm space-y-2 text-slate-300">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-400 mt-1 text-xs"></i>
+                                <span><strong>Gini vs Entropy:</strong> Measures split impurity. Gini is computationally faster; Entropy measures information gain.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-400 mt-1 text-xs"></i>
+                                <span><strong>Partial Dependence Plots (PDP):</strong> Show the marginal effect of 1 or 2 features on model predictions.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- K-Means & RFM -->
+                    <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-slate-100 text-lg">K-Means & RFM</h3>
+                            <span class="text-xs font-mono bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-md">Unsupervised</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Recency, Frequency, Monetary Segmentation</p>
+                        <ul class="text-sm space-y-2 text-slate-300">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-400 mt-1 text-xs"></i>
+                                <span><strong>Elbow Method:</strong> Plot Within-Cluster Sum of Squares (WCSS) vs $K$ to spot inflection point.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-emerald-400 mt-1 text-xs"></i>
+                                <span><strong>Silhouette Score:</strong> Quantifies cluster separation $[-1, +1]$. Higher means tighter, distinct clusters.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. BUSINESS EVALUATION METRICS -->
+            <section id="business-metrics" class="scroll-mt-6 space-y-6">
+                <div class="border-b border-slate-800 pb-4">
+                    <div class="flex items-center space-x-2 text-amber-400 text-sm font-semibold tracking-wider uppercase mb-1">
+                        <i class="fa-solid fa-calculator"></i>
+                        <span>Section 04</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Business Evaluation Metrics</h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-1">Translating statistical metrics into financial terms and stakeholder BI outputs.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Regression Business Metrics -->
+                    <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 space-y-3">
+                        <h3 class="text-lg font-bold text-amber-400">Regression Error Translation</h3>
+                        <div class="space-y-2 text-xs sm:text-sm">
+                            <div class="p-3 bg-slate-950 rounded-lg">
+                                <strong class="text-slate-200">MAE (Mean Absolute Error):</strong> "On average, our prediction is off by \$25." Highly interpretable by executives.
+                            </div>
+                            <div class="p-3 bg-slate-950 rounded-lg">
+                                <strong class="text-slate-200">RMSE (Root Mean Squared Error):</strong> Penalizes large errors heavily. Crucial if large mispredictions carry disproportionate financial penalties.
+                            </div>
+                            <div class="p-3 bg-slate-950 rounded-lg">
+                                <strong class="text-slate-200">MAPE (Mean Absolute Percentage Error):</strong> "Our forecasts are off by 4.2% on average." Standard for executive scorecards.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Classification Business Metrics -->
+                    <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 space-y-3">
+                        <h3 class="text-lg font-bold text-amber-400">Classification Trade-off Dynamics</h3>
+                        <div class="space-y-2 text-xs sm:text-sm">
+                            <div class="p-3 bg-slate-950 rounded-lg">
+                                <strong class="text-slate-200">Precision Focus:</strong> Minimizes False Positives. Essential when action cost is high (e.g., expensive retention gifts).
+                            </div>
+                            <div class="p-3 bg-slate-950 rounded-lg">
+                                <strong class="text-slate-200">Recall Focus:</strong> Minimizes False Negatives. Essential when missing a target is catastrophic (e.g., fraud, high-LTV churn).
+                            </div>
+                            <div class="p-3 bg-slate-950 rounded-lg">
+                                <strong class="text-slate-200">Exporting to BI Tools:</strong> Output predicted probabilities (`y_proba`) into SQL/Power BI tables to let stakeholders dynamically adjust threshold sliders.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. HYPERPARAMETER TUNING & LEAKAGE -->
+            <section id="tuning-leakage" class="scroll-mt-6 space-y-6">
+                <div class="border-b border-slate-800 pb-4">
+                    <div class="flex items-center space-x-2 text-purple-400 text-sm font-semibold tracking-wider uppercase mb-1">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>Section 05</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Hyperparameter Tuning & Data Leakage</h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-1">Methodologies for model optimization and avoiding overoptimistic evaluation.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 space-y-3">
+                        <h3 class="text-lg font-bold text-purple-400">Tuning Strategies</h3>
+                        <ul class="text-sm text-slate-300 space-y-2">
+                            <li class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <strong class="text-slate-100">GridSearchCV:</strong> Exhaustive search over specified parameter grid. Guarantees finding best combination in grid, but computationally expensive.
+                            </li>
+                            <li class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <strong class="text-slate-100">RandomizedSearchCV:</strong> Samples fixed number of parameter settings from specified distributions. Much faster with minimal performance loss.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 space-y-3">
+                        <h3 class="text-lg font-bold text-rose-400">Preventing Data Leakage</h3>
+                        <div class="text-sm text-slate-300 space-y-2">
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <strong class="text-slate-100">Preprocessing Leakage:</strong> Scaling/Imputation MUST be fit <em>only</em> on the training set (`fit_transform` on train, `transform` on test).
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <strong class="text-slate-100">Temporal Leakage:</strong> For time-series data, never use random train-test split. Use `TimeSeriesSplit` to respect temporal ordering.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. INTERACTIVE ROI & CHURN SIMULATOR -->
+            <section id="roi-simulator" class="scroll-mt-6 space-y-6">
+                <div class="border-b border-slate-800 pb-4">
+                    <div class="flex items-center space-x-2 text-yellow-400 text-sm font-semibold tracking-wider uppercase mb-1">
+                        <i class="fa-solid fa-coins"></i>
+                        <span>Section 06</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Interactive Business ROI & Threshold Simulator</h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-1">Adjust decision thresholds to optimize financial profit vs statistical metrics.</p>
+                </div>
+
+                <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Controls -->
+                    <div class="lg:col-span-5 space-y-5">
+                        <h3 class="text-base font-bold text-slate-200 border-b border-slate-800 pb-2">Simulation Parameters</h3>
+                        
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <label class="text-slate-300">Classification Threshold</label>
+                                <span id="thresholdVal" class="text-yellow-400 font-mono">0.50</span>
+                            </div>
+                            <input type="range" id="thresholdInput" min="0.1" max="0.9" step="0.05" value="0.5" 
+                                   oninput="updateSimulation()" class="w-full accent-yellow-400 bg-slate-800 rounded-lg cursor-pointer">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <label class="text-slate-300">Customer LTV Saved ($)</label>
+                                <span id="ltvVal" class="text-emerald-400 font-mono">$500</span>
+                            </div>
+                            <input type="range" id="ltvInput" min="100" max="2000" step="50" value="500" 
+                                   oninput="updateSimulation()" class="w-full accent-emerald-400 bg-slate-800 rounded-lg cursor-pointer">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <label class="text-slate-300">Retention Offer Cost ($)</label>
+                                <span id="costVal" class="text-rose-400 font-mono">$50</span>
+                            </div>
+                            <input type="range" id="costInput" min="10" max="300" step="10" value="50" 
+                                   oninput="updateSimulation()" class="w-full accent-rose-400 bg-slate-800 rounded-lg cursor-pointer">
+                        </div>
+
+                        <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs text-slate-400 space-y-1">
+                            <div>• Total Customer Base: <strong>10,000</strong></div>
+                            <div>• Actual Churn Rate: <strong>15% (1,500 customers)</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Metrics & Output -->
+                    <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                                <span class="text-xs text-slate-400 block">True Positives</span>
+                                <span id="tpVal" class="text-lg font-bold text-emerald-400 font-mono">0</span>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                                <span class="text-xs text-slate-400 block">False Positives</span>
+                                <span id="fpVal" class="text-lg font-bold text-rose-400 font-mono">0</span>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                                <span class="text-xs text-slate-400 block">Precision</span>
+                                <span id="precisionVal" class="text-lg font-bold text-sky-400 font-mono">0%</span>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                                <span class="text-xs text-slate-400 block">Recall</span>
+                                <span id="recallVal" class="text-lg font-bold text-purple-400 font-mono">0%</span>
+                            </div>
+                        </div>
+
+                        <!-- Financial Box -->
+                        <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-center items-center text-center space-y-2">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Net Estimated Savings / Profit</span>
+                            <span id="netProfitVal" class="text-3xl sm:text-4xl font-extrabold text-yellow-400 font-mono">$0</span>
+                            <p class="text-xs text-slate-400 max-w-md">Formula: (True Positives × LTV Saved) - ((TP + FP) × Retention Offer Cost)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. COMPREHENSIVE INTERVIEW Q&A -->
+            <section id="qa-accordion" class="scroll-mt-6 space-y-6">
+                <div class="border-b border-slate-800 pb-4">
+                    <div class="flex items-center space-x-2 text-rose-400 text-sm font-semibold tracking-wider uppercase mb-1">
+                        <i class="fa-solid fa-circle-question"></i>
+                        <span>Section 07</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Data Analyst ML Interview Q&A</h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-1">Curated real-world technical and business interview questions with collapsible solutions.</p>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="flex flex-wrap gap-2 text-xs font-medium">
+                    <button onclick="filterQA('all')" class="qa-tab px-3 py-1.5 rounded-lg bg-indigo-600 text-white">All Questions</button>
+                    <button onclick="filterQA('eda')" class="qa-tab px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">EDA & Prep</button>
+                    <button onclick="filterQA('modeling')" class="qa-tab px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Modeling</button>
+                    <button onclick="filterQA('metrics')" class="qa-tab px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Business & Metrics</button>
+                </div>
+
+                <!-- Accordion Items Container -->
+                <div class="space-y-3" id="qaContainer">
+                    
+                    <!-- Q1 -->
+                    <div class="qa-item eda bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+                        <button onclick="toggleAccordion(this)" class="w-full p-4 text-left font-semibold text-slate-200 flex justify-between items-center hover:bg-slate-800/50 transition">
+                            <span>Q1: How do you handle high cardinality categorical variables like Zip Code in a model?</span>
+                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                        </button>
+                        <div class="hidden p-4 bg-slate-950 border-t border-slate-800 text-sm text-slate-300 space-y-2">
+                            <p><strong>Answer:</strong> Avoid One-Hot Encoding due to sparse matrix explosion. Instead:</p>
+                            <ul class="list-disc list-inside space-y-1 text-slate-400 text-xs">
+                                <li>Use <strong>Target Encoding</strong> with out-of-fold smoothing to calculate average target value per category.</li>
+                                <li>Group low-frequency categories into an "Other" bin.</li>
+                                <li>Use Frequency/Count Encoding to represent category rarity.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="qa-item metrics bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+                        <button onclick="toggleAccordion(this)" class="w-full p-4 text-left font-semibold text-slate-200 flex justify-between items-center hover:bg-slate-800/50 transition">
+                            <span>Q2: A model has 98% accuracy. Why might this be misleading to business leadership?</span>
+                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                        </button>
+                        <div class="hidden p-4 bg-slate-950 border-t border-slate-800 text-sm text-slate-300 space-y-2">
+                            <p><strong>Answer:</strong> This is classic <strong>Class Imbalance</strong>. In a fraud detection dataset where 98% of transactions are legitimate, a dummy model predicting "Not Fraud" for every transaction achieves 98% accuracy but catches zero fraud. Precision, Recall, and ROC-AUC are far better metrics here.</p>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="qa-item modeling bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+                        <button onclick="toggleAccordion(this)" class="w-full p-4 text-left font-semibold text-slate-200 flex justify-between items-center hover:bg-slate-800/50 transition">
+                            <span>Q3: What is the difference between Random Forest and XGBoost?</span>
+                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                        </button>
+                        <div class="hidden p-4 bg-slate-950 border-t border-slate-800 text-sm text-slate-300 space-y-2">
+                            <p><strong>Answer:</strong></p>
+                            <ul class="list-disc list-inside space-y-1 text-slate-400 text-xs">
+                                <li><strong>Random Forest (Bagging):</strong> Builds deep decision trees independently in parallel and averages their predictions to reduce variance.</li>
+                                <li><strong>XGBoost (Boosting):</strong> Builds shallow trees sequentially where each new tree aims to correct the residual errors of prior trees.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="qa-item eda bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+                        <button onclick="toggleAccordion(this)" class="w-full p-4 text-left font-semibold text-slate-200 flex justify-between items-center hover:bg-slate-800/50 transition">
+                            <span>Q4: What is Data Leakage and how do you spot it during model building?</span>
+                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                        </button>
+                        <div class="hidden p-4 bg-slate-950 border-t border-slate-800 text-sm text-slate-300 space-y-2">
+                            <p><strong>Answer:</strong> Data leakage occurs when information from outside the training dataset (or future information) is used to create the model. You spot it when cross-validation performance is unrealistically perfect ($R^2 = 0.99$), or when feature importance highlights variables collected <em>after</em> the target event occurred.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 8. CODE SNIPPETS & SQL FEATURE EXTRACTION -->
+            <section id="code-snippets" class="scroll-mt-6 space-y-6">
+                <div class="border-b border-slate-800 pb-4">
+                    <div class="flex items-center space-x-2 text-cyan-400 text-sm font-semibold tracking-wider uppercase mb-1">
+                        <i class="fa-solid fa-code"></i>
+                        <span>Section 08</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-100">Code Snippets & SQL Feature Extraction</h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-1">Copyable production snippets for Pandas, Scikit-Learn pipelines, and SQL window feature engineering.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Python Pipeline -->
+                    <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                        <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex justify-between items-center">
+                            <span class="text-xs font-mono font-semibold text-slate-300"><i class="fa-brands fa-python text-amber-400 mr-2"></i>Python Scikit-Learn Preprocessing Pipeline</span>
+                            <button onclick="copyCode('pythonCode')" class="text-xs text-indigo-400 hover:text-indigo-300"><i class="fa-regular fa-copy mr-1"></i>Copy</button>
+                        </div>
+                        <pre id="pythonCode" class="p-4 text-xs font-mono text-emerald-400 overflow-x-auto bg-slate-950/80"><code>import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.ensemble import RandomForestClassifier
+
+# Numeric and Categorical Column Definitions
+num_features = ['age', 'income', 'tenure']
+cat_features = ['segment', 'region']
+
+# Building Preprocessing Transformers
+num_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='median')),
+    ('scaler', StandardScaler())
+])
+
+cat_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='most_frequent')),
+    ('onehot', OneHotEncoder(handle_unknown='ignore'))
+])
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', num_transformer, num_features),
+        ('cat', cat_transformer, cat_features)
+    ])
+
+# Final Pipeline
+full_pipeline = Pipeline(steps=[
+    ('preprocessor', preprocessor),
+    ('classifier', RandomForestClassifier(n_estimators=100, random_state=42))
+])
+
+# Fit Pipeline cleanly preventing leakage
+# full_pipeline.fit(X_train, y_train)</code></pre>
+                    </div>
+
+                    <!-- SQL Feature Engineering -->
+                    <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                        <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex justify-between items-center">
+                            <span class="text-xs font-mono font-semibold text-slate-300"><i class="fa-solid fa-database text-sky-400 mr-2"></i>SQL Window Feature Engineering for Churn</span>
+                            <button onclick="copyCode('sqlCode')" class="text-xs text-indigo-400 hover:text-indigo-300"><i class="fa-regular fa-copy mr-1"></i>Copy</button>
+                        </div>
+                        <pre id="sqlCode" class="p-4 text-xs font-mono text-sky-300 overflow-x-auto bg-slate-950/80"><code>WITH user_activity AS (
+    SELECT 
+        user_id,
+        COUNT(order_id) AS total_orders_l30d,
+        SUM(order_amount) AS total_spend_l30d,
+        MAX(order_timestamp) AS last_order_date
+    FROM orders
+    WHERE order_timestamp >= CURRENT_DATE - INTERVAL '30 days'
+    GROUP BY user_id
+)
+SELECT 
+    u.user_id,
+    u.signup_date,
+    COALESCE(a.total_orders_l30d, 0) AS total_orders_l30d,
+    COALESCE(a.total_spend_l30d, 0.0) AS total_spend_l30d,
+    DATE_PART('day', CURRENT_DATE - a.last_order_date) AS days_since_last_order,
+    -- Label definition: 1 if user made zero purchases in the last 60 days
+    CASE WHEN a.last_order_date IS NULL THEN 1 ELSE 0 END AS is_churn_risk
+FROM users u
+LEFT JOIN user_activity a ON u.user_id = a.user_id;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-indigo-600 text-white text-xs px-4 py-2.5 rounded-xl shadow-xl border border-indigo-400 transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-2">
+        <i class="fa-solid fa-check-circle"></i>
+        <span id="toastMsg">Action completed!</span>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Interactive Navigation
+        function setActiveNav(element) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('bg-indigo-600/20', 'text-indigo-300', 'border', 'border-indigo-500/30');
+                item.classList.add('text-slate-400');
+            });
+            element.classList.add('bg-indigo-600/20', 'text-indigo-300', 'border', 'border-indigo-500/30');
+            element.classList.remove('text-slate-400');
+            
+            // Close mobile sidebar if open
+            if (window.innerWidth < 1024) {
+                toggleMobileSidebar();
+            }
+        }
+
+        // Mobile Sidebar Toggle
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('sidebarBackdrop');
+            sidebar.classList.toggle('-translate-x-full');
+            backdrop.classList.toggle('hidden');
+        }
+
+        // Accordion Toggle
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Q&A Category Filter
+        function filterQA(category) {
+            const items = document.querySelectorAll('.qa-item');
+            const buttons = document.querySelectorAll('.qa-tab');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+            event.target.classList.add('bg-indigo-600', 'text-white');
+
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // ROI Simulator Calculation
+        function updateSimulation() {
+            const threshold = parseFloat(document.getElementById('thresholdInput').value);
+            const ltv = parseFloat(document.getElementById('ltvInput').value);
+            const cost = parseFloat(document.getElementById('costInput').value);
+
+            document.getElementById('thresholdVal').innerText = threshold.toFixed(2);
+            document.getElementById('ltvVal').innerText = '$' + ltv;
+            document.getElementById('costVal').innerText = '$' + cost;
+
+            // Simulated math based on threshold logic
+            const totalActualChurners = 1500;
+            const totalNonChurners = 8500;
+
+            // As threshold increases, Recall drops, Precision increases
+            const recall = Math.max(0.1, 1.0 - Math.pow(threshold, 1.8));
+            const precision = Math.min(0.95, 0.3 + Math.pow(threshold, 1.2) * 0.6);
+
+            const tp = Math.round(totalActualChurners * recall);
+            const fp = Math.round(tp * (1 - precision) / precision);
+
+            const grossSavings = tp * ltv;
+            const totalCost = (tp + fp) * cost;
+            const netProfit = grossSavings - totalCost;
+
+            document.getElementById('tpVal').innerText = tp.toLocaleString();
+            document.getElementById('fpVal').innerText = fp.toLocaleString();
+            document.getElementById('precisionVal').innerText = Math.round(precision * 100) + '%';
+            document.getElementById('recallVal').innerText = Math.round(recall * 100) + '%';
+            
+            const netEl = document.getElementById('netProfitVal');
+            netEl.innerText = (netProfit >= 0 ? '$' : '-$') + Math.abs(netProfit).toLocaleString();
+            netEl.className = 'text-3xl sm:text-4xl font-extrabold font-mono ' + (netProfit >= 0 ? 'text-yellow-400' : 'text-rose-400');
+        }
+
+        // Copy Code Helper
+        function copyCode(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Code copied to clipboard!');
+            });
+        }
+
+        // Toast Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Initialize Simulator
+        window.onload = function() {
+            updateSimulation();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.ipynb_checkpoints/
+
+# Environment secrets
+.env
+!.env.example
+
+# Vectorstore binary index (optional, can commit or ignore)
+vectorstore/*.faiss
+vectorstore/*.pkl
+
+# OS files
+.DS_Store
+Thumbs.db
