@@ -1,0 +1,146 @@
+[
+  {
+    "id": "q01",
+    "question": "What is machine learning?",
+    "relevant_sources": ["Machine Learning Notes.pdf"],
+    "relevant_keywords": ["learn", "data", "algorithms", "experience", "patterns"],
+    "gold_answer": "Machine learning is a subset of artificial intelligence that focuses on building systems that learn from data and improve their performance with experience without being explicitly programmed.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q02",
+    "question": "What is supervised learning?",
+    "relevant_sources": ["Machine Learning Notes.pdf"],
+    "relevant_keywords": ["labeled", "input", "output", "supervision", "training"],
+    "gold_answer": "Supervised learning is a machine learning paradigm where models are trained on labeled data consisting of input-output pairs to learn a mapping function.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q03",
+    "question": "What is unsupervised learning?",
+    "relevant_sources": ["Machine Learning Notes.pdf"],
+    "relevant_keywords": ["unlabeled", "clustering", "patterns", "hidden", "grouping"],
+    "gold_answer": "Unsupervised learning involves training models on unlabeled data to discover underlying patterns, groupings, or structures such as clustering and dimensionality reduction.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q04",
+    "question": "What is the difference between regression and classification?",
+    "relevant_sources": ["Machine Learning Notes.pdf"],
+    "relevant_keywords": ["continuous", "discrete", "categorical", "values", "predicting"],
+    "gold_answer": "Regression predicts continuous numerical values, whereas classification predicts discrete categorical labels or classes.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q05",
+    "question": "What is hyperparameter tuning in machine learning?",
+    "relevant_sources": ["Machine Learning Notes.pdf"],
+    "relevant_keywords": ["hyperparameters", "grid", "random", "tuning", "optimization"],
+    "gold_answer": "Hyperparameter tuning is the process of optimizing model configurations that are set prior to training (such as learning rate or tree depth) to improve model generalization.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q06",
+    "question": "How should missing values be handled in an exploratory data analysis pipeline?",
+    "relevant_sources": ["data_analyst_ml_guide_dashboard.html"],
+    "relevant_keywords": ["imputation", "median", "mean", "missing", "drop"],
+    "gold_answer": "Missing values can be handled by dropping missing records, imputing numerical columns using mean or median, and imputing categorical features with mode or a distinct missing indicator.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q07",
+    "question": "What is the Interquartile Range (IQR) method for detecting outliers?",
+    "relevant_sources": ["data_analyst_ml_guide_dashboard.html"],
+    "relevant_keywords": ["iqr", "q1", "q3", "1.5", "outliers", "quartile"],
+    "gold_answer": "The IQR method calculates IQR = Q3 - Q1, defining outliers as data points lying below Q1 - 1.5 * IQR or above Q3 + 1.5 * IQR.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q08",
+    "question": "What is the difference between StandardScaler and MinMaxScaler?",
+    "relevant_sources": ["data_analyst_ml_guide_dashboard.html"],
+    "relevant_keywords": ["standardscaler", "minmaxscaler", "mean", "variance", "0 and 1", "scaling"],
+    "gold_answer": "StandardScaler standardizes features to zero mean and unit variance, whereas MinMaxScaler scales features bounded within a fixed range typically between 0 and 1.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q09",
+    "question": "How does logistic regression support classification?",
+    "relevant_sources": ["data_analyst_ml_guide_dashboard.html"],
+    "relevant_keywords": ["logistic", "sigmoid", "probability", "odds", "classification"],
+    "gold_answer": "Logistic regression applies the sigmoid activation function to a linear combination of features to output a probability score between 0 and 1 for classification.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q10",
+    "question": "How can machine learning metrics be connected to business value?",
+    "relevant_sources": ["data_analyst_ml_guide_dashboard.html"],
+    "relevant_keywords": ["roi", "cost", "confusion", "business", "retention", "false positive"],
+    "gold_answer": "Machine learning metrics translate to business value by assigning financial costs and gains to confusion matrix outcomes (such as false positives vs false negatives) to calculate net ROI.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q11",
+    "question": "What is the difference between stemming and lemmatization in NLP?",
+    "relevant_sources": ["nlp_technical_reference_guide.md"],
+    "relevant_keywords": ["stemming", "lemmatization", "porter", "wordnet", "dictionary", "lemma"],
+    "gold_answer": "Stemming uses heuristic rule-based truncation producing non-dictionary stems, while lemmatization uses morphological analysis with POS tags to return genuine dictionary lemmas.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q12",
+    "question": "What is the difference between Byte-Pair Encoding (BPE) and WordPiece tokenization?",
+    "relevant_sources": ["nlp_technical_reference_guide.md"],
+    "relevant_keywords": ["bpe", "wordpiece", "frequency", "likelihood", "subwords"],
+    "gold_answer": "BPE iteratively merges the most frequent pairs of adjacent tokens, whereas WordPiece merges pairs that maximize language model training data likelihood.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q13",
+    "question": "What is the difference between Word2Vec and GloVe embeddings?",
+    "relevant_sources": ["nlp_technical_reference_guide.md"],
+    "relevant_keywords": ["word2vec", "glove", "co-occurrence", "skip-gram", "cbow", "matrix"],
+    "gold_answer": "Word2Vec learns static vectors using local window prediction (Skip-Gram or CBOW), whereas GloVe factorizes a global word-word co-occurrence matrix.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q14",
+    "question": "What is scaled dot-product attention and its mathematical formulation?",
+    "relevant_sources": ["nlp_technical_reference_guide.md"],
+    "relevant_keywords": ["attention", "softmax", "qk^t", "sqrt", "d_k", "values"],
+    "gold_answer": "Scaled dot-product attention computes Attention(Q, K, V) = softmax(Q K^T / sqrt(d_k)) V to dynamically weigh sequence alignments.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q15",
+    "question": "What is the difference between HNSW and IVF vector indexing strategies?",
+    "relevant_sources": ["nlp_technical_reference_guide.md"],
+    "relevant_keywords": ["hnsw", "ivf", "graph", "voronoi", "cells", "hierarchical"],
+    "gold_answer": "HNSW builds a multi-layer proximity graph for high-speed high-recall navigation, while IVF partitions the vector space into Voronoi cells to narrow candidate search.",
+    "is_out_of_domain": false
+  },
+  {
+    "id": "q16",
+    "question": "What is quantum key distribution protocol BB84?",
+    "relevant_sources": [],
+    "relevant_keywords": ["bb84", "quantum", "photon", "polarization"],
+    "gold_answer": "I couldn't find enough information in the provided documents to answer this question.",
+    "is_out_of_domain": true
+  },
+  {
+    "id": "q17",
+    "question": "What are the exact ingredients and baking temperature for traditional Neapolitan pizza dough?",
+    "relevant_sources": [],
+    "relevant_keywords": ["pizza", "yeast", "flour", "oven"],
+    "gold_answer": "I couldn't find enough information in the provided documents to answer this question.",
+    "is_out_of_domain": true
+  },
+  {
+    "id": "q18",
+    "question": "What is the synthesis mechanism of mRNA lipid nanoparticles for vaccine delivery?",
+    "relevant_sources": [],
+    "relevant_keywords": ["mrna", "lipid", "nanoparticles", "vaccine"],
+    "gold_answer": "I couldn't find enough information in the provided documents to answer this question.",
+    "is_out_of_domain": true
+  }
+]

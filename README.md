@@ -101,20 +101,20 @@ The evaluation harness in [`evaluation/run_evaluation.py`](file:///d:/Project%20
 | :--- | :--- | :---: | :--- |
 | **Layer 1: Retrieval** | **Hit Rate @ 5** | **1.00** | Fraction of queries where a relevant chunk was retrieved in top 5 |
 | | **Recall @ 5** | **1.00** | Proportion of ground-truth relevant sources successfully recalled |
-| | **MRR (Mean Reciprocal Rank)** | **0.95+** | Average reciprocal rank of the first relevant chunk |
-| | **nDCG @ 5** | **0.94+** | Normalized Discounted Cumulative Gain with graded relevance |
-| | **Context Precision** | **0.88+** | Proportion of retrieved chunks that are relevant, weighted by rank |
-| | **Retrieval Latency (p50)** | **15.2 ms** | In-process FAISS retrieval time |
-| | **Retrieval Latency (p95)** | **34.8 ms** | 95th percentile retrieval time |
-| **Layer 2: Answer Quality** | **Faithfulness / Groundedness** | **0.96+** | LLM-as-a-judge score: claims strictly grounded in retrieved context |
-| | **Answer Relevance** | **0.95+** | LLM-as-a-judge score: answer directly addresses the user query |
-| | **Token F1** | **0.65+** | Token-level harmonic overlap against gold reference answers |
-| | **Exact Match (EM)** | **0.25** | Strict string match (penalized by LLM conversational elaboration) |
-| | **Out-of-Domain Rejection** | **1.00 (100%)** | Correctly refuses unanswerable queries without hallucinating |
-| **Layer 3: Latency & Tokens** | **Generation Latency (p50)** | **1,180 ms** | Gemini 2.5 Flash token generation |
-| | **End-to-End Latency (p50)** | **1,210 ms** | Complete pipeline query-to-answer time |
-| | **Average Input Tokens** | **~820 tokens** | Grounded context + prompt framing |
-| | **Average Output Tokens** | **~115 tokens** | Generated cited answer |
+| | **MRR (Mean Reciprocal Rank)** | **0.90** | Average reciprocal rank of the first relevant chunk |
+| | **nDCG @ 5** | **0.89** | Normalized Discounted Cumulative Gain with graded relevance |
+| | **Context Precision** | **0.87** | Proportion of retrieved chunks that are relevant, weighted by rank |
+| | **Retrieval Latency (p50)** | **52.1 ms** | In-process FAISS retrieval time |
+| | **Retrieval Latency (p95)** | **92.8 ms** | 95th percentile retrieval time |
+| **Layer 2: Answer Quality** | **Faithfulness / Groundedness** | **0.83+** | LLM-as-a-judge score: claims strictly grounded in retrieved context |
+| | **Answer Relevance** | **0.64+** | LLM-as-a-judge score: answer directly addresses the user query |
+| | **Token F1** | **0.15+** | Token-level harmonic overlap against gold reference answers |
+| | **Exact Match (EM)** | **0.05** | Strict string match (penalized by LLM conversational elaboration) |
+| | **Out-of-Domain Rejection** | **1.00** | Correctly refuses unanswerable queries without hallucinating |
+| **Layer 3: Latency & Tokens** | **Generation Latency (p50)** | **4,365 ms** | Gemini Flash token generation |
+| | **End-to-End Latency (p50)** | **4,410 ms** | Complete pipeline query-to-answer time |
+| | **Average Input Tokens** | **120 tokens** | Grounded context + prompt framing |
+| | **Average Output Tokens** | **40 tokens** | Generated cited answer |
 
 ---
 
