@@ -13,7 +13,6 @@ PROJECT_DIR = Path(__file__).resolve().parent.parent
 EVALUATION_DIR = Path(__file__).resolve().parent
 
 sys.path.insert(0, str(PROJECT_DIR))
-
 from retrieve_context import retrieve_context
 from main import generate_answer, get_llm, extract_content_text
 

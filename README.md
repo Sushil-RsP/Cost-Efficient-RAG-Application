@@ -55,9 +55,9 @@ We selected **FAISS (Facebook AI Similarity Search)** as our core vector engine:
 
 ### Features:
 * **Multi-Format Ingestion:** Ingests PDF (`PyPDFLoader`), HTML (`BeautifulSoup` stripping scripts/styles/tags), and Markdown (`.md`).
-* **Configurable Chunking:** Configured via `.env` (`CHUNK_SIZE`, `CHUNK_OVERLAP`) with sensible defaults:
-  - Default `CHUNK_SIZE`: **800 characters**
-  - Default `CHUNK_OVERLAP`: **120 characters**
+* **Configurable Chunking:** Fully configurable via environment variables (`CHUNK_SIZE`, `CHUNK_OVERLAP` in `.env` / `chunk_vector.py`):
+  - **Active Production Defaults:** `CHUNK_SIZE = 800` characters, `CHUNK_OVERLAP = 120` characters.
+  - **Calibration Context:** Prototyped initially at a baseline of `900/150`, then calibrated to `800/120` to prevent context clipping across multi-page PDF tables and HTML dashboard cards. The current FAISS index (`vector_count = 78`) is compiled under `800/120`.
 * **Deterministic Idempotency:** Each chunk is assigned a deterministic hash ID:
   $$\text{Chunk ID} = \text{SHA256}(\text{source\_file} + \text{page} + \text{chunk\_index} + \text{content})[:16]$$
   Prevents duplicate vector insertions when re-running ingestion over existing files.
