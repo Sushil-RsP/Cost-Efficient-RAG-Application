@@ -1,5 +1,5 @@
 {
-  "evaluation_timestamp": "2026-10-25T07:28:06Z",
+  "evaluation_timestamp": "2026-10-25T09:14:09Z",
   "total_questions_evaluated": 18,
   "in_domain_count": 15,
   "out_of_domain_count": 3,
@@ -9,24 +9,24 @@
     "mrr": 0.9022,
     "mean_ndcg_at_5": 0.8939,
     "mean_context_precision": 0.8733,
-    "retrieval_latency_p50_ms": 52.11,
-    "retrieval_latency_p95_ms": 92.79,
-    "retrieval_latency_mean_ms": 59.29
+    "retrieval_latency_p50_ms": 44.62,
+    "retrieval_latency_p95_ms": 75.04,
+    "retrieval_latency_mean_ms": 52.04
   },
   "layer_2_answer_metrics": {
     "mean_faithfulness_groundedness": 0.8333,
-    "mean_answer_relevance": 0.6406,
+    "mean_answer_relevance": 0.6278,
     "mean_token_f1": 0.0707,
     "mean_exact_match": 0.0,
     "out_of_domain_rejection_accuracy": 0.0,
-    "generation_latency_p50_ms": 4365.86,
-    "generation_latency_p95_ms": 16048.93,
-    "generation_latency_mean_ms": 7563.47
+    "generation_latency_p50_ms": 3936.75,
+    "generation_latency_p95_ms": 13933.59,
+    "generation_latency_mean_ms": 5764.07
   },
   "layer_3_cost_and_latency": {
-    "end_to_end_latency_p50_ms": 4410.96,
-    "end_to_end_latency_p95_ms": 16141.72,
-    "end_to_end_latency_mean_ms": 7622.76,
+    "end_to_end_latency_p50_ms": 4015.15,
+    "end_to_end_latency_p95_ms": 13979.25,
+    "end_to_end_latency_mean_ms": 5816.11,
     "mean_input_tokens_per_query": 120,
     "mean_output_tokens_per_query": 40,
     "vector_store_monthly_cost_summary": {
@@ -75,7 +75,7 @@
           2,
           2
         ],
-        "retrieval_latency_ms": 121.84
+        "retrieval_latency_ms": 41.42
       },
       "answer_metrics": {
         "answer": "Machine Learning \nModel Building \u2014 Complete Study Notes \nSimple explanations + Interview Q&A for every topic \nTopics \n  1.  Types of ML \u2014 Supervised vs Unsupervised \n  2.  Supervised: Regression vs Classification \n  3.  Linear Models \u2014 Linear & Logistic Regression, Gradient Descent \n  4.  Nonlinear Models \u2014 Decision Tree, Random Forest, XGBoost \n  5.  Model Evaluation \u2014 Regression & Classification Metrics \n  6.  Hyperparameter Tuning \u2014 GridSearchCV & RandomizedSearchCV \n  7.  Unsupervised \u2014 K-Means, DBSCAN, PCA \n1.  Types of Machine Learning \n \n\ud83e\udde0  What is Machine Learning? \nML = teaching computers to learn from data instead of writing explicit rules. \nJust like you learn to recognize cats by seeing many cats, ML models learn [Source 1: Machine Learning Notes.pdf, section/chunk 1]",
@@ -83,7 +83,7 @@
         "answer_relevance": 1.0,
         "token_f1": 0.1185,
         "exact_match": 0.0,
-        "generation_latency_ms": 20204.73
+        "generation_latency_ms": 9997.01
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -119,7 +119,7 @@
           1,
           1
         ],
-        "retrieval_latency_ms": 54.22
+        "retrieval_latency_ms": 51.6
       },
       "answer_metrics": {
         "answer": "\ud83d\udcda  Analogy \nLike studying with an answer key. You see questions (features) + correct answers (labels). \nThe model learns the mapping: INPUT \u2192 OUTPUT from thousands of examples. \n \n\u25c6  Training data has BOTH inputs (X) and correct outputs (y) \n\u25c6  Model learns to predict y from X \n\u25c6  Two main tasks: Regression (predict a number) & Classification (predict a category) \n\u25c6  Examples: predicting house prices, spam detection, disease diagnosis \n \n\ud83d\udd0d Unsupervised Learning \n\ud83d\uddfa\ufe0f  Analogy \nLike exploring a new city without a map. You find your own patterns! \nNo labels \u2014 the model discovers structure hidden in raw data. \n \n\u25c6  Only inputs (X) \u2014 no correct answer labels \n\u25c6  Goal: discover clusters, associations, or reduced representations [Source 1: Machine Learning Notes.pdf, page 2]",
@@ -127,7 +127,7 @@
         "answer_relevance": 0.7,
         "token_f1": 0.1053,
         "exact_match": 0.0,
-        "generation_latency_ms": 14657.57
+        "generation_latency_ms": 13672.94
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -163,7 +163,7 @@
           2,
           2
         ],
-        "retrieval_latency_ms": 58.2
+        "retrieval_latency_ms": 65.15
       },
       "answer_metrics": {
         "answer": "\u25c6  Only inputs (X) \u2014 no correct answer labels \n\u25c6  Goal: discover clusters, associations, or reduced representations \n\u25c6  Examples: customer segmentation, anomaly detection, data compression \n \n\ud83c\udfa4  Interview Questions \nQ1. What is the difference between supervised and unsupervised learning? \nQ2. Can you give a real-world example of each type of ML? \nQ3. What is the difference between ML and traditional programming? \nQ4. When would you choose unsupervised over supervised learning? \n2.  Supervised: Regression vs Classification \n \n\ud83c\udfaf  The Core Difference \u2014 One Simple Question \nREGRESSION  \u2192 predicts a NUMBER   (How much? How many? How far?) \nCLASSIFICATION \u2192 predicts a CATEGORY  (Which one? Is it A or B?) \n \n\ud83d\udcc8 Regression \n\u25c6  Output is a continuous number [Source 1: Machine Learning Notes.pdf, page 2]",
@@ -171,7 +171,7 @@
         "answer_relevance": 1.0,
         "token_f1": 0.0902,
         "exact_match": 0.0,
-        "generation_latency_ms": 14894.48
+        "generation_latency_ms": 4892.41
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -207,7 +207,7 @@
           2,
           1
         ],
-        "retrieval_latency_ms": 87.66
+        "retrieval_latency_ms": 57.53
       },
       "answer_metrics": {
         "answer": "Loss function MSE, MAE, RMSE \n Classification \nOutput type Discrete label (e.g. 'Spam') \nQuestion answered Which category / Is it X? \nExample Email \u2192 Spam or Not Spam \nLoss function Cross-entropy, Log loss \n \n\ud83c\udfa4  Interview Questions \nQ1. What is the difference between regression and classification? Give examples. \nQ2. Can a classification problem become a regression problem? How? \nQ3. What is multi-label classification vs multi-class classification? \nQ4. What loss functions are used for regression vs classification? \n3.  Linear Models \n \n\ud83d\udccf Linear Regression \n\ud83c\udfe0  Analogy \u2014 Best Fit Line \nImagine you're plotting house sizes vs prices on a graph. \nLinear Regression draws the BEST straight line through those points. \nThen for any new house size, you read off the price from that line! [Source 1: Machine Learning Notes.pdf, page 3]",
@@ -215,7 +215,7 @@
         "answer_relevance": 1.0,
         "token_f1": 0.0602,
         "exact_match": 0.0,
-        "generation_latency_ms": 15315.55
+        "generation_latency_ms": 13904.27
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -251,15 +251,15 @@
           0,
           2
         ],
-        "retrieval_latency_ms": 67.88
+        "retrieval_latency_ms": 38.63
       },
       "answer_metrics": {
         "answer": "\ud83c\udf9b\ufe0f  Parameters vs Hyperparameters \nPARAMETERS \u2192 learned automatically during training (e.g. weights, biases) \nHYPERPARAMETERS \u2192 set by YOU before training (e.g. learning_rate, max_depth, n_estimators) \nTuning hyperparameters = finding the best settings for your model. [Source 1: Machine Learning Notes.pdf, page 11]",
         "faithfulness": 1.0,
-        "answer_relevance": 1.0,
+        "answer_relevance": 0.77,
         "token_f1": 0.1562,
         "exact_match": 0.0,
-        "generation_latency_ms": 14226.52
+        "generation_latency_ms": 13920.81
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -295,7 +295,7 @@
           1,
           1
         ],
-        "retrieval_latency_ms": 50.01
+        "retrieval_latency_ms": 66.61
       },
       "answer_metrics": {
         "answer": "2. Business Feature Engineering\nTransforming raw database logs into domain-specific aggregates (e.g., RFM scores, trailing 30-day ratios, interaction rates).\n3. Business Metric Alignment\nTranslating statistical metrics ($R^2$, Log Loss) into dollars saved, customer retention rate, or inventory cost reduction.\nThe Analyst Advantage:\nData Analysts stand out by knowing\nwhy\na model matters to stakeholders. While ML engineers focus on deployment pipelines, Analysts focus on decision utility, feature interpretability, and ROI alignment.\nSection 02\nEDA & Data Cleaning Pipeline for ML\nRigorous data preparation strategies to prevent garbage-in, garbage-out outcomes.\nHandling Missing Values\nMean vs. Median vs. Mode\nUse\nMedian\nfor skewed continuous data (e.g., Income),\nMean [Source 1: data_analyst_ml_guide_dashboard.html, section/chunk 2]",
@@ -303,7 +303,7 @@
         "answer_relevance": 0.75,
         "token_f1": 0.1194,
         "exact_match": 0.0,
-        "generation_latency_ms": 14108.75
+        "generation_latency_ms": 13879.73
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -339,7 +339,7 @@
           0,
           1
         ],
-        "retrieval_latency_ms": 65.26
+        "retrieval_latency_ms": 72.11
       },
       "answer_metrics": {
         "answer": "Handling Missing Values\nMean vs. Median vs. Mode\nUse\nMedian\nfor skewed continuous data (e.g., Income),\nMean\nfor normally distributed continuous features, and\nMode\nfor categorical variables.\nIndicator Columns (`is_missing`)\nCreate explicit binary flags (`is_null_age = 1`) prior to imputation. Missingness itself is often a predictive business signal.\nWhen to Drop vs. Impute\nDrop columns if missingness exceeds $40$-$50\\%$ unless missingness is informative. Drop rows only if missingness is completely random and dataset size is ample.\nOutlier Detection & Treatment\nIQR Method (Non-parametric)\nBounds = [Q1 - 1.5\u00d7IQR, Q3 + 1.5\u00d7IQR]\nRobust against extreme skewed values. Ideal for e-commerce order amounts.\nZ-Score Method (Parametric)\nFlag if |Z| > 3 where Z = (X - \u03bc) / \u03c3 [Source 1: data_analyst_ml_guide_dashboard.html, section/chunk 3]",
@@ -347,7 +347,7 @@
         "answer_relevance": 0.78,
         "token_f1": 0.0752,
         "exact_match": 0.0,
-        "generation_latency_ms": 13892.8
+        "generation_latency_ms": 14005.99
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -383,7 +383,7 @@
           0,
           2
         ],
-        "retrieval_latency_ms": 48.26
+        "retrieval_latency_ms": 91.65
       },
       "answer_metrics": {
         "answer": "from sklearn.model_selection import train_test_split \nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, \nrandom_state=42) \n \n# \u2500\u2500 SCALING \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 \nfrom sklearn.preprocessing import StandardScaler \nscaler = StandardScaler() \nX_train = scaler.fit_transform(X_train)   # fit+transform on train \nX_test  = scaler.transform(X_test)         # only transform on test! \n \n# \u2500\u2500 CROSS-VALIDATION \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 \nfrom sklearn.model_selection import cross_val_score \nscores = cross_val_score(model, X, y, cv=5, scoring='f1') \nprint(f'CV F1: {scores.mean():.4f} \u00b1 {scores.std():.4f}') \n \n# \u2500\u2500 PIPELINE \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 \nfrom sklearn.pipeline import Pipeline [Source 1: Machine Learning Notes.pdf, page 17]",
@@ -391,7 +391,7 @@
         "answer_relevance": 0.66,
         "token_f1": 0.0465,
         "exact_match": 0.0,
-        "generation_latency_ms": 13807.25
+        "generation_latency_ms": 2981.09
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -427,7 +427,7 @@
           0,
           0
         ],
-        "retrieval_latency_ms": 67.33
+        "retrieval_latency_ms": 61.29
       },
       "answer_metrics": {
         "answer": "model = LinearRegression() \nmodel.fit(X, y) \n \nprint(f'Slope (weight): {model.coef_[0]:.2f}')          # ~7.2 \nprint(f'Intercept (bias): {model.intercept_:.2f}')       # ~27.5 \nprint(f'Predicted salary for 11 years: {model.predict([[11]])[0]:.1f}k') \n \n\ud83d\udd00 Logistic Regression \n\ud83d\udea6  Analogy \u2014 Sigmoid Switch \nDespite the name, Logistic Regression is a CLASSIFICATION algorithm! \nIt uses a special S-shaped curve (sigmoid) to squish any number into 0\u21921. \nIf output > 0.5 \u2192 predict class 1 (e.g. spam). If < 0.5 \u2192 predict class 0. \n \nSigmoid Function \n\u03c3(z) = 1 / (1 + e^(-z))     where z = w\u00b7x + b \nMaps any real number to a probability between 0 and 1 \n \nfrom sklearn.linear_model import LogisticRegression \nfrom sklearn.datasets import load_breast_cancer [Source 1: Machine Learning Notes.pdf, page 4]",
@@ -435,7 +435,7 @@
         "answer_relevance": 0.8,
         "token_f1": 0.2414,
         "exact_match": 0.0,
-        "generation_latency_ms": 2616.02
+        "generation_latency_ms": 5616.04
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -471,7 +471,7 @@
           2,
           2
         ],
-        "retrieval_latency_ms": 46.42
+        "retrieval_latency_ms": 44.71
       },
       "answer_metrics": {
         "answer": "Target Encoding\nHigh cardinality (e.g., Zip Codes, Product IDs)\nCompact representation; highly prone to\ntarget leakage\nif un-smoothed.\nStandardScaler\nDistance-based models (SVM, KNN) & Linear/Logistic Regression\nCenters data (Mean=0, Std=1). Sensitive to extreme outliers.\nMinMaxScaler\nNeural Nets or algorithms requiring bounded range [0,1]\nPreserves zero values in sparse matrices, but severely compressed by outliers.\nLog Transformation\nRight-skewed monetary features (Revenue, Spend)\nCompresses long tails, making distributions normal and improving linear model fit.\nSection 03\nAnalytics-Driven ML Models\nInterpreting core machine learning algorithms for business decision-makers.\nRegression Models\nInterpretable [Source 1: data_analyst_ml_guide_dashboard.html, section/chunk 5]",
@@ -479,7 +479,7 @@
         "answer_relevance": 0.76,
         "token_f1": 0.1167,
         "exact_match": 0.0,
-        "generation_latency_ms": 4295.59
+        "generation_latency_ms": 6490.28
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -515,7 +515,7 @@
           1,
           1
         ],
-        "retrieval_latency_ms": 41.66
+        "retrieval_latency_ms": 44.54
       },
       "answer_metrics": {
         "answer": "--- [Source 1: nlp_technical_reference_guide.md, section/chunk 2]",
@@ -523,7 +523,7 @@
         "answer_relevance": 0.6,
         "token_f1": 0.0,
         "exact_match": 0.0,
-        "generation_latency_ms": 488.19
+        "generation_latency_ms": 721.3
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -559,7 +559,7 @@
           1,
           1
         ],
-        "retrieval_latency_ms": 69.14
+        "retrieval_latency_ms": 40.07
       },
       "answer_metrics": {
         "answer": "### B. Modern Tokenization Algorithms [Source 1: nlp_technical_reference_guide.md, section/chunk 3]",
@@ -567,7 +567,7 @@
         "answer_relevance": 0.64,
         "token_f1": 0.0,
         "exact_match": 0.0,
-        "generation_latency_ms": 426.34
+        "generation_latency_ms": 498.5
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -603,7 +603,7 @@
           1,
           1
         ],
-        "retrieval_latency_ms": 48.39
+        "retrieval_latency_ms": 36.72
       },
       "answer_metrics": {
         "answer": "### B. Modern Tokenization Algorithms [Source 1: nlp_technical_reference_guide.md, section/chunk 3]",
@@ -611,7 +611,7 @@
         "answer_relevance": 0.6,
         "token_f1": 0.0,
         "exact_match": 0.0,
-        "generation_latency_ms": 428.92
+        "generation_latency_ms": 466.91
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -647,7 +647,7 @@
           1,
           0
         ],
-        "retrieval_latency_ms": 38.53
+        "retrieval_latency_ms": 42.94
       },
       "answer_metrics": {
         "answer": "--- [Source 1: nlp_technical_reference_guide.md, section/chunk 5]",
@@ -655,7 +655,7 @@
         "answer_relevance": 0.6,
         "token_f1": 0.0,
         "exact_match": 0.0,
-        "generation_latency_ms": 720.8
+        "generation_latency_ms": 430.08
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -691,7 +691,7 @@
           0,
           0
         ],
-        "retrieval_latency_ms": 73.97
+        "retrieval_latency_ms": 40.18
       },
       "answer_metrics": {
         "answer": "## 5. Vector Search & Retrieval-Augmented Generation (RAG) [Source 1: nlp_technical_reference_guide.md, section/chunk 8]",
@@ -699,7 +699,7 @@
         "answer_relevance": 0.64,
         "token_f1": 0.125,
         "exact_match": 0.0,
-        "generation_latency_ms": 616.73
+        "generation_latency_ms": 892.0
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -733,7 +733,7 @@
           0,
           0
         ],
-        "retrieval_latency_ms": 43.76
+        "retrieval_latency_ms": 38.7
       },
       "answer_metrics": {
         "answer": "$$\n\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V\n$$ [Source 1: nlp_technical_reference_guide.md, section/chunk 6]",
@@ -741,7 +741,7 @@
         "answer_relevance": 0.0,
         "token_f1": 0.0,
         "exact_match": 0.0,
-        "generation_latency_ms": 4436.14
+        "generation_latency_ms": 438.13
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -775,7 +775,7 @@
           0,
           0
         ],
-        "retrieval_latency_ms": 48.9
+        "retrieval_latency_ms": 59.02
       },
       "answer_metrics": {
         "answer": "print(f'MAE:  {mae:.2f}')    # 14.0 \nprint(f'MSE:  {mse:.2f}')    # 270.0 \nprint(f'RMSE: {rmse:.2f}')   # 16.43 \nprint(f'MAPE: {mape:.2f}%')  # 5.95% \nprint(f'R\u00b2:   {r2:.4f}')     # 0.9946  (1.0 = perfect) \n \n\ud83c\udff7\ufe0f Classification Metrics \n\ud83d\udcca  Confusion Matrix \u2014 The Foundation of All Classification Metrics \nA 2\u00d72 table showing predicted vs actual outcomes for binary classification: \n \n  TP (True Positive)  = predicted YES, actual YES  \u2705 \n  TN (True Negative)  = predicted NO,  actual NO   \u2705 \n  FP (False Positive) = predicted YES, actual NO   \u274c  (Type I Error) \n  FN (False Negative) = predicted NO,  actual YES  \u274c  (Type II Error) \n \nfrom sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay \nimport matplotlib.pyplot as plt \n \ncm = confusion_matrix(y_test, y_pred) \nprint(cm) [Source 1: Machine Learning Notes.pdf, page 10]",
@@ -783,7 +783,7 @@
         "answer_relevance": 0.0,
         "token_f1": 0.0183,
         "exact_match": 0.0,
-        "generation_latency_ms": 572.13
+        "generation_latency_ms": 495.21
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
@@ -817,7 +817,7 @@
           0,
           0
         ],
-        "retrieval_latency_ms": 35.86
+        "retrieval_latency_ms": 43.79
       },
       "answer_metrics": {
         "answer": "--- [Source 1: nlp_technical_reference_guide.md, section/chunk 12]",
@@ -825,7 +825,7 @@
         "answer_relevance": 0.0,
         "token_f1": 0.0,
         "exact_match": 0.0,
-        "generation_latency_ms": 433.86
+        "generation_latency_ms": 450.58
       },
       "token_usage": {
         "generation_latency_ms": 15.0,
